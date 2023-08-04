@@ -48,7 +48,7 @@ export function About() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>NetworkDemo</Text>
+      <Text style={styles.title}>Danh sách film phổ biến</Text>
       {data === undefined ? (
         <Text>Loading ...</Text>
       ) : (
@@ -65,24 +65,33 @@ export interface Props {
 const MovieComponent: React.FC<Props> = props => {
   console.log(props);
   return (
-   
-    <View>
-   
-      <Text>Page : {props.post.page}</Text>
-      <Text>total_pages : {props.post.total_pages}</Text>
-      <Text>total_results : {props.post.total_results}</Text>
+   <ScrollView>
+   <Text>Page : {props.post.page}</Text>
+     
       <Text>Results </Text>
       {props.post.results?.map(result => (
         <Text key={result.id}>
-          {result.adult} - {result.backdrop_path} - {result.genre_ids}
-          {/* - {result.original_language} - {result.original_title} - {result.overview} */}
-          {/* - {result.poster_path} - {result.release_date}
+          {result.adult} 
+          - {result.backdrop_path} 
+          - {result.genre_ids}
+          - {result.id}
+          - {result.original_language} 
+          - {result.original_title} 
+          - {result.overview}
+          - {result.poster_path} 
+          - {result.release_date}
           - {result.title}
-          - {result.video} - {result.vote_average} - {result.vote_count} */}
+          - {result.video} 
+          - {result.vote_average} 
+          - {result.vote_count}
+          
         </Text>
+        
       ))}
-
-    </View>
+       <Text>total_pages : {props.post.total_pages}</Text>
+      <Text>total_results : {props.post.total_results}</Text>
+</ScrollView>
+ 
   );
 };
 
@@ -97,6 +106,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 22,
     color: '#000',
-  },
+   marginBottom:10
+    },
 });
 export default About;
