@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, StyleSheet,ScrollView} from 'react-native';
+import {View, Text, StyleSheet,FlatList,Image} from 'react-native';
 import { } from 'react-native-gesture-handler';
 
 type Result = {
@@ -48,7 +48,7 @@ export function About() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Danh sách film phổ biến</Text>
+     
       {data === undefined ? (
         <Text>Loading ...</Text>
       ) : (
@@ -63,38 +63,35 @@ export interface Props {
 }
 
 const MovieComponent: React.FC<Props> = props => {
-  console.log(props);
-  return (
-   <ScrollView>
-   <Text>Page : {props.post.page}</Text>
-     
-      <Text>Results </Text>
-      {props.post.results?.map(result => (
-        <Text key={result.id}>
-          {result.adult} 
-          - {result.backdrop_path} 
-          - {result.genre_ids}
-          - {result.id}
-          - {result.original_language} 
-          - {result.original_title} 
-          - {result.overview}
-          - {result.poster_path} 
-          - {result.release_date}
-          - {result.title}
-          - {result.video} 
-          - {result.vote_average} 
-          - {result.vote_count}
-          
-        </Text>
-        
-      ))}
-       <Text>total_pages : {props.post.total_pages}</Text>
-      <Text>total_results : {props.post.total_results}</Text>
-</ScrollView>
- 
-  );
-};
+  const renderMovie = ({ item }) => {
+    const backdropUrl = `https://image.tmdb.org/t/p/w500/${item.backdrop_path}`;
 
+    return (
+      <View style={styles.list}>
+        
+        <Image source={{ uri: backdropUrl }} style={styles.backdropImage} />
+        <View style={styles.txtlist}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text>Date: {item.release_date}</Text>
+          <Text>Vote_average: {item.vote_average}</Text>
+          <Text>Vote_count: {item.vote_count}</Text>
+        </View>
+        
+      </View>
+    );
+  };
+  // console.log(props);
+  return (
+    <View>
+      <Text style={{textAlign: 'center', fontSize:30, color:'#000', marginBottom:10}}>Danh sách film phổ biến</Text>
+      <FlatList
+      data={props.post.results}
+        renderItem={renderMovie}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </View>
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -102,11 +99,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 22,
-    color: '#000',
-   marginBottom:10
+  title:{
+    fontSize: 20,
+    color: '#000'
+  },
+    backdropImage:{
+      width: 150,
+      height: 150,
+      marginHorizontal:10
+    },
+    txtlist:{
+      padding: 10,
+      justifyContent: 'space-between',
+      
+    },
+    list:{
+      flexDirection: 'row',
+      marginBottom: 10
     },
 });
 export default About;
