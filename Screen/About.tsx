@@ -75,6 +75,7 @@ const MovieComponent: React.FC<Props> = props => {
           <Text>Date: {item.release_date}</Text>
           <Text>Vote_average: {item.vote_average}</Text>
           <Text>Vote_count: {item.vote_count}</Text>
+          <Text>Vote_count: {item.title}</Text>
         </View>
         
       </View>
