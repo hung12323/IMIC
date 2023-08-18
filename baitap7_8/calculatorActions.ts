@@ -16,7 +16,7 @@ export const performAddition = (num1: number, num2: number) => {
     setTimeout(() => {
       const result = num1 + num2;
       dispatch({type: ADDITION_SUCCESS, payload: result});
-    }, 2);
+    }, 200);
   };
 };
 
@@ -27,7 +27,7 @@ export const performSubtraction = (num1: number, num2: number) => {
     setTimeout(() => {
       const result = num1 - num2;
       dispatch({type: SUBTRACTION_SUCCESS, payload: result});
-    }, 2);
+    }, 200);
   };
 };
 
@@ -38,7 +38,7 @@ export const performMultiplication = (num1: number, num2: number) => {
     setTimeout(() => {
       const result = num1 * num2;
       dispatch({type: MULTIPLICATION_SUCCESS, payload: result});
-    }, 2);
+    }, 200);
   };
 };
 
@@ -49,6 +49,6 @@ export const performDivision = (num1: number, num2: number) => {
     setTimeout(() => {
       const result = num1 / num2;
       dispatch({type: DIVISION_SUCCESS, payload: result});
-    }, 2);
+    }, 200);
   };
 };
